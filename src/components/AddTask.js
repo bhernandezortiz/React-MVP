@@ -21,7 +21,7 @@ const AddTask = ({ setTaskList }) => {
     const getData=await fetch('/home')
     const data = await getData.json()
     setTaskList(data)
-    setNewTask('')
+    // setNewTask(data)
     } catch (error) {
       console.error(error);
     }

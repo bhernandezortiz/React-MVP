@@ -102,9 +102,9 @@ return (
             strokeLinecap: 'butt',
             textSize: '16px',
             pathTransitionDuration: 0.5,
-            pathColor: red,
+            pathColor: green,
             textColor: '#FEFFFE',
-            trailColor: green,
+            trailColor: red,
             backgroundColor: '#3e98c7',
             })} />
         </div>

@@ -17,12 +17,12 @@ const pool = new Pool ({
     // password:'',
     // port: 5432,
     // database:'task_list',
-    // host:'localhost'
+    // host:'localhost',
     connectionString: process.env.DATABASE_URL,
 })
 
 pool.connect();
-
+console.log(pool)
 app.get("/", (req,res) => {
     try {
         res.sendFile(path.join(__dirname, "build","index.html"));
