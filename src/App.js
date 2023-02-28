@@ -1,24 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from 'react';
+import TaskList from './components/TaskList';
+import Timer from './components/Timer';
+import Settings from './components/Settings'
+import SettingsContext from './components/SettingsContext';
 
 function App() {
+  // const [tasks, setTasks] = useState([]);
+  const [taskList, setTaskList] = useState([])
+  const [showSettings, setShowSettings] = useState(false);
+  const [workMinutes, setWorkMinutes] = useState (45)
+  const [breakMinutes, setBreakMinutes] = useState (15)
+
+  useEffect(() => {
+    async function fetchTasks() {
+      const response = await fetch('http://localhost:3000/home');
+      const data = await response.json();
+      setTaskList(data);
+    }
+
+    fetchTasks();
+  }, []);
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <SettingsContext.Provider value={{
+        workMinutes,
+        breakMinutes,
+        setWorkMinutes,
+        setBreakMinutes,
+        showSettings,
+        setShowSettings,
+      }}>
+        {showSettings ? <Settings /> : <Timer />}
+      </SettingsContext.Provider>
+      <TaskList taskList={taskList} setTaskList={setTaskList}/>
+    </>
   );
 }
 
