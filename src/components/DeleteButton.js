@@ -2,7 +2,7 @@ import React from "react";
 
 const DeleteButton = ({ task, onDelete }) => {
   const handleClick = () => {
-    fetch(`http://localhost:3000/home/${task.id}`, {
+    fetch(`/home/${task.id}`, {
       method: "DELETE",
     })
       .then((response) => response.json())

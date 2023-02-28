@@ -5,7 +5,7 @@ const UpdateTask = ({ task, onUpdate }) => {
 
   const handleEdit = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/home/${task.id}`, {
+      const response = await fetch(`/home/${task.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -26,7 +26,7 @@ const UpdateTask = ({ task, onUpdate }) => {
   return (
     <>
       <input type="text" value={editedTask} onChange={handleChange} />
-      <button onClick={handleEdit}>Update</button>
+      <button className='button' onClick={handleEdit}>Update</button>
     </>
   );
 };

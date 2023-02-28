@@ -21,14 +21,16 @@ const TaskList = ({ taskList, setTaskList }) => {
 
   return (
     <div>
+      <div className='inputs'>
         {selectedTask && (
           <UpdateTask task={selectedTask} onUpdate={handleUpdate}/>
         )}
           <AddTask setTaskList={setTaskList}/>
+      </div>
           {taskList.map((task) => (
   <div className='taskList' key={task.id}>
     <Task task={task}/>
-    <button onClick={() => setSelectedTask(task)}>Edit</button>
+    <button className='button' onClick={() => setSelectedTask(task)}>Select</button>
     <DeleteButton task={task} onDelete={handleDelete} />
   </div>
 ))}

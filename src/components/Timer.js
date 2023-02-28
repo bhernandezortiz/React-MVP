@@ -108,14 +108,16 @@ return (
             backgroundColor: '#3e98c7',
             })} />
         </div>
-        <div style={{marginTop:'20px'}}>
+    <div className='container'>
+        <div>
         {isPaused
-          ? <StartButton onClick={() => { setIsPaused(false); isPausedRef.current = false; }} />
-          : <PauseButton onClick={() => { setIsPaused(true); isPausedRef.current = true; }} />}
+          ? <StartButton className='startColor' onClick={() => { setIsPaused(false); isPausedRef.current = false; }} />
+          : <PauseButton className='pauseColor' onClick={() => { setIsPaused(true); isPausedRef.current = true; }} />}
         </div>
-        <div style={{marginTop:'20px'}}>
+        <div>
          <SettingButton onClick={() => settingsInfo.setShowSettings(true)}/>
         </div>
+    </div>
       {/* <h1>{`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`}</h1>
         <button onClick={toggleTimer}>{isActive ? 'Pause' : 'Start'}</button>
         <button onClick={resetTimer}>Reset</button> */}

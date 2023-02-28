@@ -3,28 +3,40 @@ const cors = require("cors")
 const app = express();
 const port = 3000;
 const { Pool } = require("pg");
-// const dotenv = require("dotenv");
-// dotenv.config();
+const dotenv = require("dotenv");
+const path = require("path");
+
+dotenv.config();
 
 app.use(express.json())
 app.use(cors())
+app.use(express.static(path.join(__dirname,"build")))
 
 const pool = new Pool ({
-    user:'bhernandezortiz',
-    password:'',
-    port: 5432,
-    database:'task_list',
-    host:'localhost'
+    // user:'bhernandezortiz',
+    // password:'',
+    // port: 5432,
+    // database:'task_list',
+    // host:'localhost'
+    connectionString: process.env.DATABASE_URL,
 })
 
-// pool.connect();
+pool.connect();
+
+app.get("/", (req,res) => {
+    try {
+        res.sendFile(path.join(__dirname, "build","index.html"));
+    }catch(error){
+        console.error(error)
+    }
+});
 
 app.route('/home')
-    .get(async (req, res) => {
-        try{
-            const result = await pool.query("SELECT * FROM task_list ORDER BY id ASC");
-            res.status(200).type('application/json').json(result.rows)
-        } catch (err) {
+.get(async (req, res) => {
+    try{
+        const result = await pool.query("SELECT * FROM task_list ORDER BY id ASC");
+        res.status(200).type('application/json').json(result.rows)
+    } catch (err) {
             console.log(err.message)
         }
     })

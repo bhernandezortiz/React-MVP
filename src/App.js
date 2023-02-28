@@ -13,7 +13,7 @@ function App() {
 
   useEffect(() => {
     async function fetchTasks() {
-      const response = await fetch('http://localhost:3000/home');
+      const response = await fetch('/home');
       const data = await response.json();
       setTaskList(data);
     }
@@ -24,6 +24,10 @@ function App() {
 
   return (
     <>
+      <nav className='nav'>
+    POMODORO
+    </nav>
+      <div className='clockpart'>
       <SettingsContext.Provider value={{
         workMinutes,
         breakMinutes,
@@ -34,7 +38,11 @@ function App() {
       }}>
         {showSettings ? <Settings /> : <Timer />}
       </SettingsContext.Provider>
+      </div>
+      <div className='title'>
+        <div className='titletext'>Task List</div>
       <TaskList taskList={taskList} setTaskList={setTaskList}/>
+      </div>
     </>
   );
 }
